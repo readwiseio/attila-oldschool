@@ -1,8 +1,8 @@
 {
-  "name": "attila",
+  "name": "atilla-rw-custom",
   "description": "Ghost Theme",
   "demo": "https://attila.peteramende.de",
-  "version": "3.9.0",
+  "version": "4.0.0",
   "engines": {
     "ghost": ">=5.0.0"
   },

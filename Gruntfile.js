@@ -66,7 +66,7 @@ module.exports = function(grunt) {
     compress: {
       main: {
         options: {
-          archive: 'dist/atilla-rw-custom.zip',
+          archive: `dist/${require('./package.json').name}.zip`,
           level: 9
         },
         files: [{

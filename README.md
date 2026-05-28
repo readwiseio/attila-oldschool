@@ -68,12 +68,22 @@ npm install
 ````
 Build project:
 ````bash
-grunt build
+npm run build
 ````
 The compress task packages the theme files into `dist/<theme-name>.zip`, which you can then upload to your site.
 ````bash
-grunt compress
+npm run zip
 ````
+
+## AI Agent Skills
+
+Repo-local Codex skills live in `.codex/skills/`, and `AGENTS.md` points general-purpose AI agents to the right skill before they edit the theme.
+
+* `readwise-ghost-theme-design-system` guides visual, typography, layout, color, responsive, and component-level theme changes.
+* `readwise-ghost-theme-packaging` guides ZIP generation, release artifact handling, and CI packaging changes.
+
+After a pull request is merged to `master`, GitHub Actions builds the theme and uploads `dist/atilla-rw-custom.zip` as a workflow artifact. The ZIP is intentionally not committed to git.
+
 ## ⚖️ Copyright & License
 
 Copyright (C) 2015-2025 Peter Amende - Released under the [MIT License](https://github.com/zutrinken/attila/blob/master/LICENSE).

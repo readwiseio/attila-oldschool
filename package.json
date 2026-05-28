@@ -3,6 +3,10 @@
   "description": "Ghost Theme",
   "demo": "https://attila.peteramende.de",
   "version": "4.0.0",
+  "scripts": {
+    "build": "grunt build",
+    "zip": "grunt compress"
+  },
   "engines": {
     "ghost": ">=5.0.0"
   },

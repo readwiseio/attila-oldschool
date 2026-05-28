@@ -1,0 +1,5 @@
+interface:
+  display_name: "Readwise Theme Packaging"
+  short_description: "Package and publish the Readwise theme ZIP"
+  brand_color: "#1EAEDB"
+  default_prompt: "Use $readwise-ghost-theme-packaging to package and publish the Readwise Ghost theme ZIP."

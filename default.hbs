@@ -14,113 +14,42 @@
 	{{!-- Styles'n'Scripts --}}
 	<link rel="stylesheet" type="text/css" href="{{asset "css/style.css"}}" />
 
-	<script>
-			var siteUrl = '{{@site.url}}';
-	</script>
-
-	<script>
-		var localTheme = localStorage.getItem('attila_theme');
-		switch (localTheme) {
-			case 'dark':
-				document.documentElement.classList.add('theme-dark');
-				break;
-			case 'light':
-				document.documentElement.classList.add('theme-light');
-				break;
-			default:
-				document.documentElement.classList.remove('theme-dark', 'theme-light');
-				break;
-		}
-	</script>
-
-	{{#match @custom.color_scheme "Dark"}}
-		<script>localStorage.setItem('attila_theme', 'dark');</script>
-		<style>.js-theme {display:none!important;}</style>
-	{{/match}}
-
-	{{#match @custom.color_scheme "Light"}}
-		<script>localStorage.setItem('attila_theme', 'light');</script>
-		<style>.js-theme {display:none!important;}</style>
-	{{/match}}
-
-	{{#match @custom.color_scheme "!=" "Light"}}
-		{{#if @custom.darkmode_accent_color}}
-			<style>
-				.theme-dark:root {
-					--ghost-accent-color: {{@custom.darkmode_accent_color}};
-				}
-				@media (prefers-color-scheme: dark) {
-					html:not(.theme-light):root {
-						--ghost-accent-color: {{@custom.darkmode_accent_color}};
-					}
-				}
-			</style>
-		{{/if}}
-	{{/match}}
-
 	{{ghost_head}}
 </head>
 
 <body class="{{body_class}}">
 
-	<div class="viewport">
-		<div class="nav-header">
-			<nav class="nav-wrapper" aria-label="{{t "Main"}}">
-				{{#if @site.logo}}
-					<span class="logo">
-						<a href="{{@site.url}}" title="{{t "Home"}}"><img src="{{@site.logo}}" alt="{{t "Logo"}}" /></a>
-					</span>
-				{{/if}}
-				{{navigation}}
-				<a class="nav-search" title="{{t "Search"}}" aria-label="{{t "Search"}}" data-ghost-search><i class="icon icon-search" aria-hidden="true">{{> "icons/icon-search"}}</i></a>
-				{{#if @site.members_enabled}}
-					<span class="nav-members">
-						{{#unless @member}}
-							{{#unless @site.members_invite_only}}
-								<a class="nav-button-secondary" href="#/portal/signin" data-portal="signin">{{t "Sign in"}}</a>
-								{{#unless hideSubscribeButton}}
-									<a class="nav-button-primary" href="#/portal/signup" data-portal="signup">{{t "Subscribe"}}</a>
-								{{/unless}}
-							{{else}}
-								<a class="nav-button-primary" href="#/portal/signin" data-portal="signin">{{t "Sign in"}}</a>
-							{{/unless}}
-						{{else}}
-							<a class="nav-button-secondary" href="#/portal/account" data-portal="account">{{t "Account"}}</a>
-						{{/unless}}
-					</span>
-				{{/if}}
-			</nav>
+	{{navigation}}
 
-			<div class="nav-wrapper-control">
-				<div class="inner">
-					<a class="nav-menu" role="button"><i class="icon icon-menu" aria-hidden="true">{{> "icons/icon-menu"}}</i> {{t "Menu"}}</a>
-					<a class="nav-search" title="{{t "Search"}}" aria-label="{{t "Search"}}" role="button" data-ghost-search><i class="icon icon-search" aria-hidden="true">{{> "icons/icon-search"}}</i></a>
-				</div>
+	<section id="wrapper">
+		<a class="hidden-close" aria-label="{{t "Close"}}"></a>
+
+		<nav id="navigation" aria-label="{{t "Main"}}">
+			{{#if @site.logo}}
+			<span class="blog-logo">
+				<a href="{{@site.url}}" title="{{t "Home"}}"><img src="{{@site.logo}}" alt="Blog Logo" /></a>
+			</span>
+			{{else}}
+			<span id="home-button" class="nav-button">
+				<a class="home-button" href="{{@site.url}}" title="{{t "Home"}}"><i class="icon icon-arrow-left" aria-hidden="true">{{> "icons/icon-arrow-left"}}</i> {{t "Home"}}</a>
+			</span>
+			{{/if}}
+			<span id="menu-button" class="nav-button">
+				<a class="menu-button" role="button"><i class="icon icon-menu" aria-hidden="true">{{> "icons/icon-menu"}}</i> {{t "Menu"}}</a>
+			</span>
+		</nav>
+
+		{{{body}}}
+
+		<footer id="footer">
+			<div class="inner">
+				<section class="credits">
+					<span class="credits-theme">Theme <a href="https://github.com/zutrinken/attila">Attila</a> by <a href="http://zutrinken.com" rel="nofollow">zutrinken</a></span>
+					<span class="credits-software">Published with <a href="https://ghost.org">Ghost</a></span>
+				</section>
 			</div>
-		</div>
-		<div class="nav-close" role="button" aria-label="{{t "Close"}}"></div>
-
-		<section class="page-wrapper">
-
-			{{{body}}}
-
-			<div class="nav-footer">
-				<nav class="nav-wrapper" aria-label="{{t "Footer"}}">
-					<span class="nav-copy">{{@site.title}} &copy; {{date format='YYYY'}}</span>
-					<span class="nav-center">
-						<span class="nav-mode">
-							<a class="js-theme" href="#" data-system="System" data-dark="Dark" data-light="Light"><span class="theme-icon"></span><span class="theme-text">System</span> </a>
-						</span>
-						{{#if @site.secondary_navigation}}
-							{{navigation type="secondary"}}
-						{{/if}}
-					</span>
-					<span class="nav-publish">{{t "Published with"}} <a href="https://ghost.org">Ghost</a> {{t "and" }} <a href="https://github.com/zutrinken/attila">Attila</a></span>
-				</nav>
-			</div>
-
-		</section>
-	</div>
+		</footer>
+	</section>
 
 	{{!-- Load basic scripts --}}
 	<script type="text/javascript" src="{{asset "js/script.js"}}"></script>

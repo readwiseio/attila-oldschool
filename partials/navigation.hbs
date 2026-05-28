@@ -1,5 +1,22 @@
-<ul>
-	{{#foreach navigation}}
-		<li class="nav-{{slug}}{{#if current}} active{{/if}}"><a href="{{url absolute="true"}}"><span>{{label}}</span></a></li>
-	{{/foreach}}
-</ul>
+<nav id="menu" aria-label="{{t "Menu"}}">
+	<a class="close-button" role="button">{{t "Close"}}</a>
+	<div class="nav-wrapper">
+		<p class="nav-label">{{t "Menu"}}</p>
+		<ul>
+			{{#foreach navigation}}
+			<li class="nav-{{slug}}{{#if current}} active{{/if}}" role="presentation"><a href="{{url absolute="true"}}">{{label}}</a></li>
+			{{/foreach}}
+			{{#if @site.twitter}}
+			<li class="nav-twitter"><a href="{{social_url type="twitter"}}" title="{{@site.twitter}}"><i class="icon icon-twitter" aria-hidden="true">{{> "icons/icon-twitter"}}</i> Twitter</a></li>
+			{{/if}}
+			{{#if @site.facebook}}
+			<li class="nav-facebook"><a href="{{social_url type="facebook"}}" title="{{@site.facebook}}"><i class="icon icon-facebook" aria-hidden="true">{{> "icons/icon-facebook"}}</i> Facebook</a></li>
+			{{/if}}
+			{{#if @site.members_enabled}}
+			<li class="nav-subscribe"><a href="#/portal/signup" data-portal="signup"><i class="icon icon-mail" aria-hidden="true">{{> "icons/icon-mail"}}</i> Subscribe</a></li>
+			{{else}}
+			<li class="nav-rss"><a href="{{@site.url}}/rss/"><i class="icon icon-rss" aria-hidden="true">{{> "icons/icon-rss"}}</i> Subscribe</a></li>
+			{{/if}}
+		</ul>
+	</div>
+</nav>

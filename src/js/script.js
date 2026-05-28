@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var html = document.documentElement;
   var menu = document.getElementById("menu");
   var navMenu = document.querySelector(".nav-menu");
+  var menuButton = document.querySelector(".menu-button");
   var navClose = document.querySelector(".nav-close");
+  var hiddenClose = document.querySelector(".hidden-close");
 
   // Function to toggle the menu
   function toggleMenu() {
@@ -13,7 +15,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event listeners for menu toggle
   if (menu) menu.addEventListener("click", toggleMenu);
   if (navMenu) navMenu.addEventListener("click", toggleMenu);
+  if (menuButton) menuButton.addEventListener("click", toggleMenu);
   if (navClose) navClose.addEventListener("click", toggleMenu);
+  if (hiddenClose) hiddenClose.addEventListener("click", toggleMenu);
 
   // Remove menu-active class on window resize or orientation change
   window.addEventListener("resize", function () {

@@ -6,21 +6,13 @@
 
 <article class="{{post_class}}">
 	<div class="inner">
-		<div class="box post-box">
-			{{#if featured}}
-				<span class="post-feature">
-					<i class="icon icon-star">{{> "icons/icon-star"}}</i>
-				</span>
-			{{/if}}
+		<div class="post-box">
 			<h2 class="post-title"><a href="{{url}}">{{{title}}}</a></h2>
-			<span class="post-meta">
-				{{t "By"}}
-				{{authors separator=", "}}
-				{{#primary_tag}}{{t "in"}} <a class="post-meta-tag" href="{{url}}">{{name}}</a>{{/primary_tag}}
-				{{t "on"}}
-				<time datetime="{{date format='DD-MM-YYYY'}}">{{date format="DD MMM YYYY"}}</time>
-			</span>
-			<p class="post-excerpt">{{excerpt}}&hellip;</p>
+			<span class="post-meta">{{authors separator=", "}} {{tags prefix=" on " separator=", "}} | <time datetime="{{date format='YYYY-MM-DD'}}">{{date format="DD MMM YYYY"}}</time></span>
+			<div class="clear"></div>
+			<section class="post-excerpt">
+				<p>{{excerpt}}&hellip;</p>
+			</section>
 		</div>
 	</div>
 </article>

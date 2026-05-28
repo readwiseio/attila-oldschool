@@ -7,43 +7,11 @@
 	<span class="progress-bar"></span>
 </div>
 
-<header class="post-header {{#if feature_image}} has-cover {{/if}}">
+<header id="post-header"{{#if feature_image}} class="has-cover" {{/if}}>
 	<div class="inner">
-		<span class="post-info">
-			<span class="post-type">{{t "Article"}}</span>
-			{{#if tags}}
-			<span class="post-count">{{primary_tag.name}}</span>
-			{{/if}}
-		</span>
 		<h1 class="post-title">{{{title}}}</h1>
-		<div class="post-meta">
-			<div class="post-meta-avatars">
-				{{#foreach authors}}
-					{{#if profile_image}}
-						<figure class="post-meta-avatar">
-							<a href="{{url}}" class="author-avatar">
-								<img class="author-profile-image" src="{{img_url profile_image size="xs"}}" alt="{{name}}" />
-							</a>
-						</figure>
-					{{else}}
-						<figure class="post-meta-avatar avatar"></figure>
-					{{/if}}
-				{{/foreach}}
-			</div>
-			<h4 class="post-meta-author">{{authors separator=", "}}</h4>
-			<time datetime="{{date format='DD-MM-YYYY'}}">{{date format="DD MMM YYYY"}}</time> &bull; {{reading_time minute=(t "1 min read") minutes=(t "% min read")}}
-		</div>
-		{{#if feature_image}}
-		<div class="post-cover cover">
-			<img
-			srcset="{{img_url feature_image size="s"}} 320w,
-              {{img_url feature_image size="m"}} 640w,
-              {{img_url feature_image size="l"}} 960w,
-              {{img_url feature_image size="xl"}} 1920w"
-      src="{{img_url feature_image size="xl"}}"
-			alt="{{title}}" />
-		</div>
-		{{/if}}
+		<span class="post-meta">{{authors separator=", "}} | <time datetime="{{date format='YYYY-MM-DD'}}">{{date format="DD MMM YYYY"}}</time></span>
+		{{#if feature_image}}<div class="post-cover cover" style="background-image: url('{{img_url feature_image size="xl"}}');"></div>{{/if}}
 	</div>
 </header>
 
@@ -103,7 +71,7 @@
 			</section>
 			{{/if}}
 
-      {{#if @labs.subscribers}}
+      {{#if @site.members_enabled}}
       <section class="post-subscribe">
 				<p>{{t "Get the latest posts delivered right to your inbox."}}</p>
         {{subscribe_form placeholder=(t "Your email address") form_class="post-subscribe-form" input_class="post-subscribe-input" button_class="post-subscribe-button"}}

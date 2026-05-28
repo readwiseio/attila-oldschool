@@ -74,15 +74,21 @@ The compress task packages the theme files into `dist/<theme-name>.zip`, which y
 ````bash
 npm run zip
 ````
+Validate the uploadable ZIP with [GScan](https://gscan.ghost.org/):
+````bash
+npm run gscan
+````
 
 ## AI Agent Skills
 
-Repo-local Codex skills live in `.codex/skills/`, and `AGENTS.md` points general-purpose AI agents to the right skill before they edit the theme.
+Repo-local AI skills live in `.agents/skills/`, and `AGENTS.md` points general-purpose AI agents to the right skill before they edit the theme.
 
-* `readwise-ghost-theme-design-system` guides visual, typography, layout, color, responsive, and component-level theme changes.
-* `readwise-ghost-theme-packaging` guides ZIP generation, release artifact handling, and CI packaging changes.
+* `readwise-theme-design-system` guides visual, typography, layout, color, responsive, and component-level theme changes.
+* `ghost-theme-templates-contexts` guides Ghost Handlebars templates, helpers, partials, and context-specific rendering.
+* `ghost-theme-custom-settings` guides Ghost Admin custom settings through `package.json` and `@custom`.
+* `ghost-theme-packaging-validation` guides ZIP generation, GScan validation, release artifact handling, and CI packaging changes.
 
-After a pull request is merged to `master`, GitHub Actions builds the theme and uploads `dist/atilla-rw-custom.zip` as a workflow artifact. The ZIP is intentionally not committed to git.
+CI builds and validates the theme ZIP with GScan on pull requests. After a pull request is merged to `master`, GitHub Actions uploads `dist/atilla-rw-custom.zip` as a workflow artifact. The ZIP is intentionally not committed to git.
 
 ## ⚖️ Copyright & License
 

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ghost Theme Packaging"
+  short_description: "Package, validate, and publish theme ZIPs"
+  brand_color: "#1EAEDB"
+  default_prompt: "Use $ghost-theme-packaging-validation to package and validate the Ghost theme ZIP."

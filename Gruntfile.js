@@ -78,6 +78,8 @@ module.exports = function(grunt) {
             '!src/**',
             '!dist',
             '!dist/**',
+            '!.agents',
+            '!.agents/**',
             '!.codex',
             '!.codex/**',
             '!.git',

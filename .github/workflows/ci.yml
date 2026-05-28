@@ -27,7 +27,22 @@ jobs:
         run: npm ci
 
       - name: Build theme assets
-        run: npx grunt build
+        run: npm run build
 
       - name: Verify generated assets are committed
         run: git diff --exit-code -- assets/css/style.css assets/js/script.js
+
+      - name: Package theme ZIP
+        run: npm run zip
+
+      - name: Validate theme with GScan
+        run: npm run gscan
+
+      - name: Upload theme ZIP artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        uses: actions/upload-artifact@v4
+        with:
+          name: atilla-rw-custom-${{ github.sha }}
+          path: dist/atilla-rw-custom.zip
+          if-no-files-found: error
+          retention-days: 90

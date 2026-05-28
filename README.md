@@ -68,12 +68,28 @@ npm install
 ````
 Build project:
 ````bash
-grunt build
+npm run build
 ````
 The compress task packages the theme files into `dist/<theme-name>.zip`, which you can then upload to your site.
 ````bash
-grunt compress
+npm run zip
 ````
+Validate the uploadable ZIP with [GScan](https://gscan.ghost.org/):
+````bash
+npm run gscan
+````
+
+## AI Agent Skills
+
+Repo-local AI skills live in `.agents/skills/`, and `AGENTS.md` points general-purpose AI agents to the right skill before they edit the theme.
+
+* `readwise-theme-design-system` guides visual, typography, layout, color, responsive, and component-level theme changes.
+* `ghost-theme-templates-contexts` guides Ghost Handlebars templates, helpers, partials, and context-specific rendering.
+* `ghost-theme-custom-settings` guides Ghost Admin custom settings through `package.json` and `@custom`.
+* `ghost-theme-packaging-validation` guides ZIP generation, GScan validation, release artifact handling, and CI packaging changes.
+
+CI builds and validates the theme ZIP with GScan on pull requests. After a pull request is merged to `master`, GitHub Actions uploads `dist/atilla-rw-custom.zip` as a workflow artifact. The ZIP is intentionally not committed to git.
+
 ## ⚖️ Copyright & License
 
 Copyright (C) 2015-2025 Peter Amende - Released under the [MIT License](https://github.com/zutrinken/attila/blob/master/LICENSE).

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Readwise Theme Design System"
+  short_description: "Guide agents through Readwise theme design edits"
+  brand_color: "#1EAEDB"
+  default_prompt: "Use $readwise-theme-design-system to improve the Readwise Ghost theme design system."

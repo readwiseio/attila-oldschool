@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ghost Theme Custom Settings"
+  short_description: "Add and review Ghost theme custom settings"
+  brand_color: "#1EAEDB"
+  default_prompt: "Use $ghost-theme-custom-settings to add a Ghost Admin theme setting."

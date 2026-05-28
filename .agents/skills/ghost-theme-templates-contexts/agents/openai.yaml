@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ghost Theme Templates"
+  short_description: "Edit Ghost templates, helpers, and contexts"
+  brand_color: "#1EAEDB"
+  default_prompt: "Use $ghost-theme-templates-contexts to update Ghost theme templates safely."

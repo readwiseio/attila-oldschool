@@ -1,0 +1,15 @@
+# Upload in Ghost Admin > Settings > Labs > Routes. Not part of the theme zip.
+routes:
+  /rss/:
+    template: rss
+    content_type: text/xml
+
+collections:
+  /:
+    permalink: /{slug}/
+    template: index
+    rss: false
+
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/

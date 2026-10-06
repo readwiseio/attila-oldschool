@@ -88,7 +88,9 @@ module.exports = function(grunt) {
             '!.gitignore',
             '!AGENTS.md',
             '!Gruntfile.js',
-            '!package-lock.json'
+            '!package-lock.json',
+            '!ghost',
+            '!ghost/**'
           ],
           dest: '.'
         }]

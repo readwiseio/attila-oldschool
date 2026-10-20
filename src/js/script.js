@@ -156,3 +156,84 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+/* Footnote previews */
+document.addEventListener("DOMContentLoaded", function () {
+  var refs = document.querySelectorAll(".post-content .footnote-ref a");
+  if (!refs.length) return;
+
+  var popover = document.createElement("div");
+  popover.className = "footnote-popover";
+  popover.setAttribute("role", "tooltip");
+  document.body.appendChild(popover);
+
+  var hideTimer = null;
+  var openRef = null;
+
+  function noteFor(ref) {
+    var target = document.querySelector(ref.getAttribute("href"));
+    if (!target) return null;
+    var copy = target.cloneNode(true);
+    var back = copy.querySelector(".footnote-backref");
+    if (back) back.remove();
+    return copy.innerHTML;
+  }
+
+  function place(ref) {
+    var rect = ref.getBoundingClientRect();
+    var width = popover.offsetWidth;
+    var left = rect.left + rect.width / 2 - width / 2;
+    left = Math.max(12, Math.min(left, window.innerWidth - width - 12));
+    var below = rect.bottom + 10;
+    var above = rect.top - popover.offsetHeight - 10;
+    var top = below + popover.offsetHeight < window.innerHeight || above < 0 ? below : above;
+    popover.style.left = left + window.scrollX + "px";
+    popover.style.top = top + window.scrollY + "px";
+  }
+
+  function show(ref) {
+    clearTimeout(hideTimer);
+    if (openRef === ref) return;
+    var html = noteFor(ref);
+    if (!html) return;
+    popover.innerHTML = html;
+    popover.classList.add("is-visible");
+    openRef = ref;
+    place(ref);
+  }
+
+  function hide() {
+    popover.classList.remove("is-visible");
+    openRef = null;
+  }
+
+  function hideSoon() {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(hide, 150);
+  }
+
+  Array.prototype.forEach.call(refs, function (ref) {
+    ref.textContent = ref.textContent.replace(/[\[\]]/g, "");
+    ref.addEventListener("mouseenter", function () { show(ref); });
+    ref.addEventListener("mouseleave", hideSoon);
+    // no focus handler: the backref anchors to this element and would pop it open; Enter still fires click
+    ref.addEventListener("click", function (event) {
+      // the number toggles the preview and never navigates; the list at the bottom still exists for no-JS and print
+      event.preventDefault();
+      if (openRef === ref) hide();
+      else show(ref);
+    });
+  });
+
+  popover.addEventListener("mouseenter", function () { clearTimeout(hideTimer); });
+  popover.addEventListener("mouseleave", hideSoon);
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") hide();
+  });
+  document.addEventListener("click", function (event) {
+    if (openRef && !popover.contains(event.target) && !openRef.contains(event.target)) hide();
+  });
+  window.addEventListener("scroll", function () {
+    if (openRef) place(openRef);
+  });
+});

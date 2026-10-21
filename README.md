@@ -88,7 +88,11 @@ Repo-local AI skills live in `.agents/skills/`, and `AGENTS.md` points general-p
 * `ghost-theme-custom-settings` guides Ghost Admin custom settings through `package.json` and `@custom`.
 * `ghost-theme-packaging-validation` guides ZIP generation, GScan validation, release artifact handling, and CI packaging changes.
 
-CI builds and validates the theme ZIP with GScan on pull requests. After a pull request is merged to `master`, GitHub Actions uploads `dist/atilla-rw-custom.zip` as a workflow artifact. The ZIP is intentionally not committed to git.
+CI builds and validates the theme ZIP with GScan on pull requests. On every push to `master`, GitHub Actions saves `dist/atilla-rw-custom.zip` as a workflow artifact and deploys that same validated ZIP to the Readwise Blog through the Ghost Admin API. The ZIP is intentionally not committed to git.
+
+Automatic deployment requires a custom integration in Ghost Admin and two repository Actions secrets, copied from that integration: `GHOST_ADMIN_API_URL` and `GHOST_ADMIN_API_KEY`. Deployment uses API version `v6.0`, compatible with the blog's Ghost 6.41.1 installation. Pull requests and pushes to other branches never deploy.
+
+The deployment action uploads the theme; ensure `atilla-rw-custom` is active in Ghost Admin during initial setup. Ghost's theme directory must be on persistent storage so uploaded themes survive Render restarts and redeploys. To roll back a theme change, revert it on `master`; CI will validate and deploy the reverted theme.
 
 ## ⚖️ Copyright & License
 

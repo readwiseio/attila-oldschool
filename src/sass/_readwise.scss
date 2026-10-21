@@ -801,6 +801,11 @@ h6,
 	margin-left: -5%;
 }
 
+// Ghost's cards.min.css loads after the theme and sets margin: auto on card images, which pins the bleed to the left
+.post-content .kg-image-card img {
+	margin: 0 0 0 -5%;
+}
+
 .post-footer {
 	margin: 6em 0 3em;
 }
@@ -1104,9 +1109,10 @@ h6,
 	}
 
 	.post-content img,
+	.post-content .kg-image-card img,
 	.post-content .fluid-width-video-wrapper {
 		width: 100%;
-		margin-left: auto;
+		margin: 0 auto;
 	}
 
 	.post-author-avatar {

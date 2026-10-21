@@ -157,6 +157,75 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+/* Footnotes from plain text */
+// Authors type [^1] in the text and a paragraph starting "[^1]:" at the end, in the normal editor; build the same markup Ghost's markdown card emits
+document.addEventListener("DOMContentLoaded", function () {
+  var content = document.querySelector(".post-content");
+  if (!content || content.querySelector(".footnotes")) return;
+
+  var defs = {};
+  var defPattern = /^\s*\[\^([^\]]+)\]:\s*/;
+  Array.prototype.forEach.call(content.querySelectorAll("p"), function (p) {
+    var match = p.textContent.match(defPattern);
+    if (!match) return;
+    var walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
+    var first = walker.nextNode();
+    if (first) first.nodeValue = first.nodeValue.replace(defPattern, "");
+    defs[match[1]] = p;
+  });
+  if (!Object.keys(defs).length) return;
+
+  var refPattern = /\[\^([^\]]+)\](?!:)/g;
+  var textNodes = [];
+  var walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT);
+  var node;
+  while ((node = walker.nextNode())) {
+    if (refPattern.test(node.nodeValue) && !node.parentNode.closest("pre, code")) textNodes.push(node);
+    refPattern.lastIndex = 0;
+  }
+
+  var order = [];
+  textNodes.forEach(function (text) {
+    var parts = text.nodeValue.split(/(\[\^[^\]]+\](?!:))/);
+    var frag = document.createDocumentFragment();
+    parts.forEach(function (part) {
+      var m = part.match(/^\[\^([^\]]+)\]$/);
+      if (m && defs[m[1]]) {
+        if (order.indexOf(m[1]) < 0) order.push(m[1]);
+        var n = order.indexOf(m[1]) + 1;
+        var sup = document.createElement("sup");
+        sup.className = "footnote-ref";
+        sup.innerHTML = '<a href="#fn' + n + '" id="fnref' + n + '">' + n + "</a>";
+        frag.appendChild(sup);
+      } else {
+        frag.appendChild(document.createTextNode(part));
+      }
+    });
+    text.parentNode.replaceChild(frag, text);
+  });
+  if (!order.length) return;
+
+  var section = document.createElement("section");
+  section.className = "footnotes";
+  var list = document.createElement("ol");
+  list.className = "footnotes-list";
+  order.forEach(function (key, i) {
+    var n = i + 1;
+    var item = document.createElement("li");
+    item.id = "fn" + n;
+    item.className = "footnote-item";
+    var p = defs[key];
+    p.insertAdjacentHTML("beforeend", ' <a href="#fnref' + n + '" class="footnote-backref">↩︎</a>');
+    item.appendChild(p);
+    list.appendChild(item);
+  });
+  Object.keys(defs).forEach(function (key) {
+    if (order.indexOf(key) < 0) defs[key].remove();
+  });
+  section.appendChild(list);
+  content.appendChild(section);
+});
+
 /* Footnote previews */
 document.addEventListener("DOMContentLoaded", function () {
   var refs = document.querySelectorAll(".post-content .footnote-ref a");

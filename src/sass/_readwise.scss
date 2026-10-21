@@ -794,16 +794,18 @@ h6,
 	color: var(--rw-accent-hover);
 }
 
+// bleed past the column, but never closer than 12px to the viewport edge (column padding is 2em = 40px)
 .post-content img,
 .post-content .fluid-width-video-wrapper {
+	--bleed: min(5%, 28px);
 	max-width: none;
-	width: 110%;
-	margin-left: -5%;
+	width: calc(100% + 2 * var(--bleed));
+	margin-left: calc(-1 * var(--bleed));
 }
 
 // Ghost's cards.min.css loads after the theme and sets margin: auto on card images, which pins the bleed to the left
 .post-content .kg-image-card img {
-	margin: 0 0 0 -5%;
+	margin: 0 0 0 calc(-1 * var(--bleed));
 }
 
 .post-footer {

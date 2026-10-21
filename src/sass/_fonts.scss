@@ -1,4 +1,36 @@
 @font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url('../fonts/SourceSerif4Variable-Roman.woff2') format('woff2-variations'), url('../fonts/SourceSerif4Variable-Roman.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url('../fonts/SourceSerif4Variable-Italic.woff2') format('woff2-variations'), url('../fonts/SourceSerif4Variable-Italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url('../fonts/SourceSans3VF-Upright.woff2') format('woff2-variations'), url('../fonts/SourceSans3VF-Upright.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: italic;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url('../fonts/SourceSans3VF-Italic.woff2') format('woff2-variations'), url('../fonts/SourceSans3VF-Italic.woff2') format('woff2');
+}
+
+@font-face {
   font-family: 'Cardo';
   font-style: normal;
   font-weight: 400;
@@ -19,23 +51,3 @@
   src: local('Cardo Italic'), local('Cardo-Italic'), url('//fonts.gstatic.com/s/cardo/v8/aRpKelDgx13ov6asvC3QbgLUuEpTyoUstqEm5AMlJo4.woff2') format('woff2'), url('//fonts.gstatic.com/s/cardo/v8/mSKSxAIybPTfRoik7xAeTQLUuEpTyoUstqEm5AMlJo4.woff') format('woff');
 }
 
-@font-face {
-  font-family: 'Fira Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Fira Sans'), local('FiraSans-Regular'), url('//fonts.gstatic.com/s/firasans/v5/EjsrzDkQUQCDwsBtLpcVQZBw1xU1rKptJj_0jans920.woff2') format('woff2'), url('//fonts.gstatic.com/s/firasans/v5/EjsrzDkQUQCDwsBtLpcVQbO3LdcAZYWl9Si6vvxL-qU.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'Fira Sans';
-  font-style: normal;
-  font-weight: 500;
-  src: local('Fira Sans Medium'), local('FiraSans-Medium'), url('//fonts.gstatic.com/s/firasans/v5/zM2u8V3CuPVwAAXFQcDi4Bampu5_7CjHW5spxoeN3Vs.woff2') format('woff2'), url('//fonts.gstatic.com/s/firasans/v5/zM2u8V3CuPVwAAXFQcDi4KRDOzjiPcYnFooOUGCOsRk.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'Fira Sans';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Fira Sans Bold'), local('FiraSans-Bold'), url('//fonts.gstatic.com/s/firasans/v5/DugPdSljmOTocZOR2CItOhampu5_7CjHW5spxoeN3Vs.woff2') format('woff2'), url('//fonts.gstatic.com/s/firasans/v5/DugPdSljmOTocZOR2CItOqRDOzjiPcYnFooOUGCOsRk.woff') format('woff');
-}

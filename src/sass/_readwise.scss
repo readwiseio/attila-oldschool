@@ -533,7 +533,7 @@ h6,
 	z-index: 20;
 	font-family: var(--font-sans);
 	line-height: 1em;
-	padding-bottom: 6em;
+	padding-bottom: 3em;
 }
 
 .credits {
@@ -803,6 +803,12 @@ h6,
 
 .post-footer {
 	margin: 6em 0 3em;
+}
+
+// drafts and previews render these empty; their margins and borders were the gap and rule under the article
+.post-footer:not(:has(*)),
+.post-nav:not(:has(a)) {
+	display: none;
 }
 
 .post-author {
@@ -1202,9 +1208,7 @@ h6,
 }
 
 .post-content .footnotes {
-	margin-top: 4rem;
-	padding-top: 2rem;
-	border-top: 1px solid var(--color-background-contrast);
+	margin-top: 3rem;
 	font-size: 0.85em;
 	color: var(--color-content-main);
 
